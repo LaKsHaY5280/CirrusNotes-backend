@@ -1,12 +1,14 @@
 const express = require("express");
+const path = require("path");
 const connectToMongo = require("./db");
 var cors = require("cors");
 
 const app = express();
-app.use(express.static("public"));
+// app.use(express.static("public"));
+app.use(express.static(path.join(__dirname, "build")));
 
 const port = 5000;
-  
+
 app.use(cors());
 
 app.use(express.json());
@@ -22,6 +24,7 @@ app.use(function (req, res, next) {
 });
 
 app.get("/", async (req, res) => {
+  res.sendFile(path.join(__dirname, "build", "index.html"));
   res.send("Hello Dev");
 });
 
