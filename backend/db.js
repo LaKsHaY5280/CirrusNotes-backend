@@ -5,7 +5,7 @@ const connectToMongo = async () => {
     await mongoose.connect(
       "mongodb+srv://akshaybuster5280:lwr22ngfc6ZY70cf@cirrusnotes.cjayuai.mongodb.net/CirrusNotes?",
       {
-        useNewUrlParser: true,
+        useNewUrlParser: true, 
         useUnifiedTopology: true,
       }
     );

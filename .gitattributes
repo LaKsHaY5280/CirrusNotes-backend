@@ -1,2 +1,9 @@
 # Auto detect text files and perform LF normalization
 * text=auto
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+backend/.env

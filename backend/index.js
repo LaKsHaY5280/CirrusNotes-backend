@@ -1,16 +1,20 @@
 const express = require("express");
 const path = require("path");
+require("dotenv").config();
 const connectToMongo = require("./db");
 var cors = require("cors");
 
 const app = express();
-// app.use(express.static("public"));
 app.use(express.static(path.join(__dirname, "build")));
 
-const port = 5000;
+const port = process.env.PORT;
+const host = process.env.NODE_ENV === "production" ? "0.0.0.0" : "localhost";
+const apiUrl =
+  process.env.NODE_ENV === "production"
+    ? "https://cirrusnotes-backend.onrender.com"
+    : `http://localhost:${port}`;
 
 app.use(cors());
-
 app.use(express.json());
 app.use(express.static("public"));
 
@@ -19,7 +23,7 @@ app.use(function (req, res, next) {
   res.header(
     "Access-Control-Allow-Headers",
     "Origin, X-Requested-With, Content-Type, Accept"
-  ); 
+  );
   next();
 });
 
@@ -32,7 +36,6 @@ app.use("/api/v1/auth", require("./routes/auth"));
 app.use("/api/v1/notes", require("./routes/notes"));
 
 connectToMongo();
-app.listen(port, () => {
-  console.log(`CirrusNotes app listening at http://localhost:${port}`);
+app.listen(port, host, () => {
+  console.log(`CirrusNotes app listening at ${apiUrl}`);
 });
- 
