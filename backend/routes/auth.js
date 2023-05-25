@@ -98,9 +98,14 @@ router.post(
       success = true;
       res.json({ success, authtoken });
     } catch (error) {
-      console.error(error.message);
-      res.status(500).send("Internal Server Error");
+      console.error("Error during login:", error);
+      if (error.name === "SomeSpecificError") {
+        res.status(500).json({ error: "A specific error occurred" });
+      } else {
+        res.status(500).json({ error: "An unknown error occurred" });
+      }
     }
+      
   }
 );
 
