@@ -4,12 +4,12 @@ require("dotenv").config();
 const connectToMongo = require("./db");
 var cors = require("cors");
 
-const app = express();
+const app = express();  
 app.use(express.static(path.join(__dirname, "build")));
 
 const port = process.env.PORT;
-const host = process.env.NODE_ENV === "production" ? "0.0.0.0" : "localhost";
-const apiUrl =
+const hostd = process.env.NODE_ENV === "production" ? "0.0.0.0" : "localhost";
+const host =
   process.env.NODE_ENV === "production"
     ? "https://cirrusnotes-backend.onrender.com"
     : `http://localhost:${port}`;
@@ -36,6 +36,6 @@ app.use("/api/v1/auth", require("./routes/auth"));
 app.use("/api/v1/notes", require("./routes/notes"));
 
 connectToMongo();
-app.listen(port, host, () => {
-  console.log(`CirrusNotes app listening at ${apiUrl}`);
+app.listen(port, hostd, () => {
+  console.log(`CirrusNotes app listening at ${host}`);
 });
