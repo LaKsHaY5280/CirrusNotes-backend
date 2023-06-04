@@ -8,7 +8,7 @@ const app = express();
 app.use(express.static(path.join(__dirname, "build")));
 
 const port = process.env.PORT;
-const hostd = process.env.NODE_ENV === "production" ? "163.53.252.211" : "localhost";
+const hostd = process.env.NODE_ENV === "production" ? "0.0.0.0" : "localhost";
 const host =
   process.env.NODE_ENV === "production"
     ? "https://cirrusnotes-backend.onrender.com"
